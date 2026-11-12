@@ -1,0 +1,11 @@
+{
+  "name": "Remix GPS.Pea.TKT",
+  "description": "ค้นหาตำแหน่งและพิกัดผู้ใช้ไฟ PEA จากข้อมูลเครื่องวัดและแผนที่",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

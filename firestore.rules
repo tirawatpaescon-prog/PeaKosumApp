@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /streetlight_surveys/{peano} {
+      allow read: if true;
+      allow write: if request.resource.data.peano is string
+                   && request.resource.data.status in ['สำรวจแล้ว', 'กำลังดำเนินการ', 'ยังไม่สำรวจ']
+                   && request.resource.data.updatedAt is number;
+    }
+    match /recloser_work/{peano} {
+      allow read: if true;
+      allow write: if request.resource.data.peano is string
+                   && request.resource.data.status in ['ยังไม่ดำเนินการ', 'กำลังดำเนินการ', 'รอนำเข้าระบบ', 'ดำเนินการเสร็จสิ้น']
+                   && request.resource.data.updatedAt is number;
+    }
+    match /patrol_work/{peano} {
+      allow read: if true;
+      allow write: if request.resource.data.peano is string
+                   && request.resource.data.status in ['ยังไม่ดำเนินการ', 'กำลังดำเนินการ', 'รอนำเข้าระบบ', 'ดำเนินการเสร็จสิ้น']
+                   && request.resource.data.updatedAt is number;
+    }
+    match /recloser_logs/{logId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.id is string
+                           && request.resource.data.recloserId is string
+                           && request.resource.data.createdAt is number;
+      allow delete: if true;
+    }
+    match /meter_assay_records/{recordId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}

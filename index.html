@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="th" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>การไฟฟ้า.โกสุมพิสัย - ค้นหาพิกัดผู้ใช้ไฟ</title>
+    <meta name="description" content="ระบบค้นหาพิกัดและข้อมูลผู้ใช้ไฟ การไฟฟ้า.โกสุมพิสัย (PEA Kosum Phisai)" />
+    <meta property="og:title" content="การไฟฟ้า.โกสุมพิสัย - ค้นหาพิกัดผู้ใช้ไฟ" />
+    <meta property="og:description" content="ระบบค้นหาพิกัดและข้อมูลผู้ใช้ไฟ การไฟฟ้า.โกสุมพิสัย (PEA Kosum Phisai)" />
+    <!-- Web App Manifest & Theme Color -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#6d28d9" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/icon.jpg" />
+    
+    <!-- Google Fonts: Prompt, Kanit, Sarabun -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#0f0720] text-gray-100 antialiased font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Register Service Worker for PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((reg) => console.log('[PWA] Service Worker registered:', reg.scope))
+            .catch((err) => console.error('[PWA] Service Worker registration failed:', err));
+        });
+      }
+    </script>
+  </body>
+</html>
+

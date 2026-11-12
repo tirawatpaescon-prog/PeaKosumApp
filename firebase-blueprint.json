@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "StreetlightSurveyStatus": {
+      "title": "StreetlightSurveyStatus",
+      "description": "Status record for a streetlight transformer survey",
+      "type": "object",
+      "properties": {
+        "peano": {
+          "type": "string",
+          "description": "PEA transformer number (e.g., 65-069274)"
+        },
+        "status": {
+          "type": "string",
+          "description": "Survey status",
+          "enum": ["สำรวจแล้ว", "กำลังดำเนินการ", "ยังไม่สำรวจ"]
+        },
+        "updatedAt": {
+          "type": "number",
+          "description": "Timestamp in milliseconds when status was updated"
+        },
+        "village": {
+          "type": "string",
+          "description": "Associated village name"
+        }
+      },
+      "required": ["peano", "status", "updatedAt"]
+    },
+    "RecloserLog": {
+      "title": "RecloserLog",
+      "description": "Log entry recording counter and current measurements for a distribution recloser",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the log entry"
+        },
+        "recloserId": {
+          "type": "string",
+          "description": "Identifier of the recloser (e.g. STT6R-31)"
+        },
+        "recloserName": {
+          "type": "string",
+          "description": "Human-readable name of the recloser location"
+        },
+        "recordDate": {
+          "type": "string",
+          "description": "Date of measurement (YYYY-MM-DD)"
+        },
+        "recordTime": {
+          "type": "string",
+          "description": "Time of measurement (HH:MM)"
+        },
+        "counterBR": { "type": "number" },
+        "counterA": { "type": "number" },
+        "counterB": { "type": "number" },
+        "counterC": { "type": "number" },
+        "counterG": { "type": "number" },
+        "currentA": { "type": "number" },
+        "currentB": { "type": "number" },
+        "currentC": { "type": "number" },
+        "currentG": { "type": "number" },
+        "notes": { "type": "string" },
+        "createdAt": {
+          "type": "number",
+          "description": "Creation timestamp in milliseconds"
+        }
+      },
+      "required": ["id", "recloserId", "recloserName", "recordDate", "recordTime", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/streetlight_surveys/{peano}": {
+      "schema": "StreetlightSurveyStatus",
+      "description": "Real-time survey status for each transformer, synced across all field technicians"
+    },
+    "/recloser_logs/{logId}": {
+      "schema": "RecloserLog",
+      "description": "Recloser logs and historical operation records, synced on startup and save"
+    }
+  }
+}
